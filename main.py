@@ -1,9 +1,14 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QMessageBox
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QPixmap
 import random
 import string
 import pyperclip
+import requests 
+
+#__author__ = "bahaqwrx"
+#__description__ = "Python Şifre Gücü Kontrol Etme Programı"
+
 
 class PasswordStrengthChecker(QWidget):
     def __init__(self):
@@ -13,8 +18,14 @@ class PasswordStrengthChecker(QWidget):
 
     def init_ui(self):
         self.setWindowTitle('Password Gücü Denetleyici')
-        self.setWindowIcon(QIcon('icon.png'))  
         self.setGeometry(300, 300, 400, 200)
+
+        icon_url = "https://w7.pngwing.com/pngs/259/835/png-transparent-computer-icons-key-key-angle-desktop-wallpaper-black-and-white.png"
+        icon_data = requests.get(icon_url).content
+        icon_pixmap = QPixmap()
+        icon_pixmap.loadFromData(icon_data)
+
+        self.setWindowIcon(QIcon(icon_pixmap))
 
         self.password_label = QLabel('Şifre:', self)
         self.password_input = QLineEdit(self)
